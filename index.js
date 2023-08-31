@@ -2,6 +2,7 @@ const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
 const scoreText = document.querySelector("#scoreText");
 const resetBtn = document.querySelector("#resetBtn");
+const highScoreText = document.querySelector("#highScore")
 const gameWidth = gameBoard.width;
 const gameHeight = gameBoard.height;
 const boardBackground = "white";
@@ -20,6 +21,7 @@ let yVelocity = 0;
 let foodX;
 let foodY;
 let score = 0;
+let highScore = localStorage.getItem("highScore") || 0
 let snake = [
     {x:unitSize * 4, y:0},
     {x:unitSize * 3, y:0},
@@ -28,13 +30,16 @@ let snake = [
     {x:0, y:0}
 ];
 
+
 window.addEventListener("keydown", changeDirection);
 resetBtn.addEventListener("click", resetGame);
 window.addEventListener("keydown", startOnKeyPress);
 window.addEventListener("keydown", reset);
 window.addEventListener("keydown", toggleGameOverHack)
+highScoreText.textContent = `High Score: ${highScore}`
 
 drawSnake();
+
 
 function startOnKeyPress(event) {
     if (listeningForKeyPress && !running && event.keyCode) {
@@ -65,6 +70,7 @@ function nextTick(){
                 yVelocity = nextDirection.y;
             }
             nextTick();
+            console.log(score)
         }, 90);
     }
     else{
@@ -120,7 +126,8 @@ function moveSnake(){
         score+=1;
         scoreText.textContent = score;
         createFood();
-        
+        highScore = score >= highScore ? score : highScore
+        localStorage.setItem("highScore", highScore)
     }
     else{
         snake.pop();
@@ -190,6 +197,7 @@ function displayGameOver(){
     ctx.fillText("GAME OVER!", gameWidth / 2, gameHeight / 2);
     running = false;
     listeningForKeyPress = false
+    highScoreText.textContent = `high Score: ${highScore}`
 };
 function resetGame(){
     score = 0;
@@ -215,4 +223,7 @@ function toggleGameOverHack(event) {
     if (event.keyCode === 72) {
         gameOverHack = !gameOverHack; 
     }
+}
+function getScore() {
+    return score;
 }

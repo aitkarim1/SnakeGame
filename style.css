@@ -21,3 +21,8 @@ body {
     border-radius: 15px;
     cursor: pointer;
 }
+#highScore {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 23px;
+    
+}
