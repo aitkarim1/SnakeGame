@@ -1,12 +1,13 @@
 body {
     background-color: aquamarine;
+    overflow: hidden;
 }
 #gameBoard {
     border: 3px solid;
     background-color: white;
 }
 #gameContainer {
-    text-align: center;
+    text-align: center; 
 }
 #scoreText {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

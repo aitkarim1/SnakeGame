@@ -70,7 +70,6 @@ function nextTick(){
                 yVelocity = nextDirection.y;
             }
             nextTick();
-            console.log(score)
         }, 90);
     }
     else{
@@ -188,6 +187,15 @@ function checkGameOver(){
             running = false;
         }
     }
+    }
+    let check = false
+    if(gameOverHack) {
+        if(snake[0].x < 0 || snake[0].x >= gameWidth) {
+            console.log(`x: ${snake[0].x}`)
+        }
+        if(snake[0].y < 0 || snake[0].y >= gameWidth) {
+            console.log(`y: ${snake[0].y}`)
+        }
     }
 };
 function displayGameOver(){
